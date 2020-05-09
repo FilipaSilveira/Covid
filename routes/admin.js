@@ -13,6 +13,6 @@ router.get('/informacoes', (req, res) => {
     res.send("We are on gerir informacoes.");
 });
 
-
+///id 
 
 module.exports = router;

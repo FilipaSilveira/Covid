@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Home = require('../modules/home');
+//const Home = require('../models/home');
 
 router.get('/', (req, res) => {
     res.send("We are on home.");
 });
 
-router.post('/', async (req, res) =>{
+/*router.post('/', async (req, res) =>{
     const post = new Home({
         user: req.body.user,
         pass: req.body.pass
@@ -17,6 +17,25 @@ router.post('/', async (req, res) =>{
     } catch (err) {
         res.json({ message: err });
     }
+});*/
+
+//pacientes
+//fazer_pedido
+router.get('/fazer_pedido', (req, res) => res.render('fazerPedido'));
+
+router.post('/receber_pedido', function(req,res,next){
+    const paciente = {
+        cod: req.body.cod,
+        name: req.body.name,
+        age: req.body.age,
+        sex: req.body.sex,
+        sintomas: req.body.sintomas
+    };
+});
+
+//ver_pedido
+router.get('/ver_pedido', (req, res) => {
+    res.render('verPedido');
 });
 
 module.exports = router;
