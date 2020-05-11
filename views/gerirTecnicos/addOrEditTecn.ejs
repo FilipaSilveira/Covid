@@ -1,0 +1,41 @@
+<form action="/gerirTecnicos" method="POST">
+    <div class="form-group">
+        <label>Código</label>
+        <input type="number" class="form-control" name="cod" value="{{gerirTecnicos.cod}}">
+    </div>
+    <div class="form-group">
+        <label>Nome</label>
+        <input type="text" class="form-control" name="name" value="{{gerirTecnicos.name}}">
+    </div>
+    <div class="form-group">
+        <label>Idade</label>
+        <input type="number" class="form-control" name="age" value="{{gerirTecnicos.age}}">
+    </div>
+    <div>
+        <label for="age">Sexo:</label><br>
+        <label class="checkbox">
+            <input type="radio" name="sex" value="masculino"> Masculino
+        </label>
+        <label class="checkbox">
+            <input type="radio" name="sex" value="feminino"> Feminino
+        </label><br><br>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" class="form-control" name="email" value="{{gerirTecnicos.email}}">
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Telemóvel</label>
+            <input type="text" class="form-control" name="mobile" value="{{gerirTecnicos.mobile}}">
+        </div>
+        <div class="form-group col-md-6">
+            <label>Cidade</label>
+            <input type="text" class="form-control" name="city" value="{{gerirTecnicos.city}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info">Guardar</button>
+        <a class="btn btn-secondary" href="gerirTecnicos/listaTecn"><i class="fa fa-list-alt"></i> Ver Todos</a>
+    </div>
+</form>

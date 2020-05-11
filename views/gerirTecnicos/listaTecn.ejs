@@ -1,0 +1,22 @@
+<h3><a class="btn btn-secondary" href="/gerirTecnicos"><i class="fa fa-plus"></i> Adicionar Novo</a> Lista de Tecnicos</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Código</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each listaTecn}}
+        <tr>
+            <td>{{this.cod}}</td>
+            <td>{{this.name}}</td>
+            <td>
+                <a href="/gerirTecnicos/{{this.cod}}"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                <a href="/gerirTecnicos/delete/{{this.cod}}" onclick="return confirm('Tem a certeza que quer eliminar este registo?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

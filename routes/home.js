@@ -3,7 +3,7 @@ const router = express.Router();
 //const Home = require('../models/home');
 
 router.get('/', (req, res) => {
-    res.send("We are on home.");
+    res.render('login')
 });
 
 /*router.post('/', async (req, res) =>{
@@ -36,6 +36,12 @@ router.post('/receber_pedido', function(req,res,next){
 //ver_pedido
 router.get('/ver_pedido', (req, res) => {
     res.render('verPedido');
+});
+
+router.post('/ver_pedido', (req, res) => {
+    //receber o código
+    //enviar informação
+    res.redirect('verPedido');
 });
 
 module.exports = router;

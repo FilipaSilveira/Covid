@@ -1,19 +1,19 @@
-<title>Preencha para fazer um pedido de teste</title>
-
 <form action="/receber_pedido" method="post">
-    <div>
+    <label>Preencha para fazer um pedido de teste:</label><br>
+
+    <div class="form-group">
         <label for="cod">Código:</label><br>
-        <input type="number" id="cod" name="cod"><br>
+        <input type="number" class="form-control" id="cod" name="cod"><br>
     </div>
-    <div>
+    <div class="form-group">
         <label for="name">Nome:</label><br>
-        <input type="text" id="name" name="name"><br>
+        <input type="text" class="form-control" id="name" name="name"><br>
     </div>
-    <div>
+    <div class="form-group">
         <label for="age">Idade:</label><br>
-        <input type="number" id="age" name="age" min="1"><br><br>
+        <input type="number" class="form-control" id="age" name="age" min="1"><br><br>
     </div>
-    <div>
+    <div class="form-group">
         <label for="age">Sexo:</label><br>
         <label class="checkbox">
             <input type="radio" name="sex" value="masculino"> Masculino
@@ -22,7 +22,7 @@
             <input type="radio" name="sex" value="feminino"> Feminino
         </label><br><br>
     </div>
-    <div>
+    <div class="form-group">
         <input type="radio" id="s24" name="info" value="male">
         <label for="s24">Encaminhado pela linha de Saúde24</label><br>
         <input type="radio" id="pgr" name="info" value="pgr">
@@ -30,15 +30,13 @@
         <input type="radio" id="tgr" name="info" value="tgr">
         <label for="tgr">Trabalho num grupo de risco</label><br><br>
     </div>
-    <div>
+    <div class="form-group">
         <label for="msg">Sintomas:</label><br>
-        <textarea name="sintomas" rows="10" cols="30">
-            Febre... 
-        </textarea><br><br>
+        <textarea name="sintomas" rows="10" cols="30"></textarea><br><br>
     </div>
 
-    <div class="button">
-        <button type="submit">Submeter</button>
+    <div class="button" class="form-group">
+        <button type="submit" class="btn btn-info">Submeter</button>
     </div>
   </form>
   
