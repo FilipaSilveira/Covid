@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const HomeSchema = mongoose.Schema({
-    user: {
-        type: String,
+const adminSchema = mongoose.Schema({
+    cod: {
+        type: Number,
         require: true
     },
     pass: {
@@ -12,4 +12,4 @@ const HomeSchema = mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('tecnicos', HomeSchema);
+module.exports = mongoose.model('Admin', adminSchema);

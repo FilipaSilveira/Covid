@@ -25,7 +25,12 @@ const tecnicoSchema = mongoose.Schema({
     },
     city: {
         type: String
-    }
+    },
+    password:{
+        type: String,
+        required: true
+    },
+    isAdmin: Boolean
 });
 
 // Custom validation for email

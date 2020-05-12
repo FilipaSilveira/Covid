@@ -1,23 +1,23 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/tecnicos', (req, res) => {
-    res.send("We are on tecnicos.");
+router.get('/', (req, res) => {
+    res.render('tecnicos/tecnicos');
 });
 
-router.get('/tecnicos/pedidos_novos', (req, res) => {
+router.get('/pedidos_novos', (req, res) => {
     res.send("We are on tecnicos pedidos novos.");
 });
 
-router.get('/tecnicos/agendados', (req, res) => {
+router.get('/agendados', (req, res) => {
     res.send("We are on tecnicos agendados.");
 });
 
-router.get('/tecnicos/espera', (req, res) => {
+router.get('/espera', (req, res) => {
     res.send("We are on tecnicos espera.");
 });
 
-router.get('/tecnicos/realizados', (req, res) => {
+router.get('/realizados', (req, res) => {
     res.send("We are on  tecnicos realizados.");
 });
 
