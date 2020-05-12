@@ -20,8 +20,8 @@ router.get('/addTecnico', (req, res) => {
 
 router.post('/addTecnico', (req, res) => {
     var gerirTecnicos = {};
-    console.log(req.body.name);
     console.log(req.body.cod);
+    console.log(req.body.name);
     res.render('gerirTecnicos/addOrEditTecn', gerirTecnicos)
 });
 

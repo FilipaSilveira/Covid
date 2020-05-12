@@ -10,6 +10,9 @@ const app = express();
 
 app.use(bodyParser.json());
 
+// Bodyparser
+app.use(express.urlencoded({ extended: false}));
+
 //app.set('views', './views');
 
 //Connect DB
