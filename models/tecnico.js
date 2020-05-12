@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const tecnicosSchema = mongoose.Schema({
+const tecnicoSchema = mongoose.Schema({
     cod: {
         type: Number,
         require: true
@@ -29,9 +29,9 @@ const tecnicosSchema = mongoose.Schema({
 });
 
 // Custom validation for email
-tecnicosSchema.path('email').validate((val) => {
+tecnicoSchema.path('email').validate((val) => {
     emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return emailRegex.test(val);
 }, 'E-mail inválido.');
 
-module.exports = mongoose.model('Tecnico', tecnicosSchema);
+module.exports = mongoose.model('Tecnico', tecnicoSchema);
