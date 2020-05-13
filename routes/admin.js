@@ -151,7 +151,7 @@ function handleValidationError(err, body) {
 }
 
 router.get('/gerirTecnicos/:cod', (req, res) => {
-    Tecnico.findById(req.params.cod, (err, doc) => {
+    Tecnico.find({cod: req.params.cod}, (err, doc) => {
         if (!err) {
             res.render("/gerirTecnicos/addOrEditTecn", {
                 tecnicos: doc
@@ -161,7 +161,7 @@ router.get('/gerirTecnicos/:cod', (req, res) => {
 });
 
 router.get('/gerirTecnicos/delete/:cod', (req, res) => {
-    Tecnico.find(req.params.cod, (err, doc) => {
+    Tecnico.deleteOne({cod: req.params.cod}, (err, doc) => {
         if (!err) {
             res.redirect('/admin/gerirTecnicos');
         }
