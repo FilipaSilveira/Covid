@@ -5,6 +5,9 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
+const bcryptj = require('bcryptjs');
+
+var config = require('./config');
 
 const app = express();
 
@@ -16,9 +19,23 @@ app.use(express.urlencoded({ extended: false}));
 //app.set('views', './views');
 
 //Connect DB
-mongoose.connect('mongodb+srv://trabalhopaw:paw2020@cluster0-gifs8.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true }, () =>
+/*mongoose.connect('mongodb+srv://trabalhopaw:paw2020@cluster0-gifs8.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true }, () =>
     console.log('connected to db')
-);
+);*/
+
+
+mongoose.connect(config.dbUrl);
+mongoose.connection.on('connected', () => {
+    console.log('connected to mongo db');
+});
+
+mongoose.connection.on('error', err => {
+    console.log('Error at mongodb: ' + err);
+});
+
+// Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
+// by default, you need to set it to false.
+mongoose.set('useFindAndModify', false);
 
 // EJS
 app.use(expressLayouts);

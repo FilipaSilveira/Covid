@@ -1,7 +1,7 @@
 <form action="/admin/gerirTecnicos/" method="post">
     <div class="form-group">
         <label>Código</label>
-        <input type="number" class="form-control" name="cod" >
+        <input type="number" class="form-control" name="cod" min="0" >
     </div>
     </div>
     <div class="form-group">
@@ -10,7 +10,7 @@
     </div>
     <div class="form-group">
         <label>Idade</label>
-        <input type="number" class="form-control" name="age" >
+        <input type="number" class="form-control" name="age" min="0">
     </div>
     <div>
         <label for="age">Sexo:</label><br>
@@ -33,6 +33,10 @@
         <div class="form-group col-md-6">
             <label>Cidade</label>
             <input type="text" class="form-control" name="city" >
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" class="form-control" name="password" >
         </div>
     </div>
     <div class="form-group">

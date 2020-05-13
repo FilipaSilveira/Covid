@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Tecnico = require('../models/tecnico');
+const Tecnico = require('../models/users');
 
 //pagina inicial do administrador
 router.get('/', (req, res) => {
@@ -10,7 +10,20 @@ router.get('/', (req, res) => {
 
 //Gerir os Técnicos (adicionar, editar e remover)
 router.get('/gerirTecnicos', (req, res) => {
-    res.render('gerirTecnicos/listaTecn')
+    //res.render('gerirTecnicos/listaTecn')
+    Tecnico.find((err,tecnicos) => {
+        if(err){
+            next(err);
+        }else{
+            //res.json(users);
+            //resultArray = users.slice();
+            //console.log(users);
+            res.render('gerirTecnicos/listaTecn', {
+                listaTecn: tecnicos,
+                //email:req.user.email
+            });
+        }
+    });
 });
 
 router.get('/addTecnico', (req, res) => {
@@ -43,13 +56,22 @@ function insertRecord(req, res) {
         tecnicos.email = req.body.email;
         tecnicos.mobile = req.body.mobile;
         tecnicos.city = req.body.city;
+        tecnicos.password = req.body.password;
+        var lastid = 0;
+        Tecnico.find((err,tecnicos) => {
+            console.log(tecnicos);
+            lastid = tecnicos[0].cod;
+            console.log(lastid);
+        }).sort({cod: -1});
+        lastid = lastid + 1;
         tecnicos.save((err, doc) => {
+            console.log(err);
         if (!err)
-            res.redirect('/gerirTecnicos/listaTecn');
+            res.redirect('/admin/gerirTecnicos');
         else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
-                res.render("/gerirTecnicos/addOrEditTecn", {
+                res.render("gerirTecnicos/addOrEditTecn", {
                     tecnicos: req.body
                 });
             }
@@ -61,11 +83,11 @@ function insertRecord(req, res) {
 
 function updateRecord(req, res) {
     Tecnico.findOneAndUpdate({ cod: req.body.cod }, req.body, { new: true }, (err, doc) => {
-        if (!err) { res.redirect('/gerirTecnicos/listaTecn'); }
+        if (!err) { res.redirect('gerirTecnicos/listaTecn'); }
         else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
-                res.render("/gerirTecnicos/addOrEditTecn", {
+                res.render("gerirTecnicos/addOrEditTecn", {
                     tecnicos: req.body
                 });
             }

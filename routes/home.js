@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-//const Home = require('../models/home');
 
 router.get('/', (req, res) => {
     res.render('login')
 });
+
+
 
 /*router.post('/', async (req, res) =>{
     const post = new Home({
