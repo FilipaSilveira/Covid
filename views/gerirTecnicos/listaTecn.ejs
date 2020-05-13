@@ -13,8 +13,8 @@
             <td><%= tec.name %></td>
             <td><%= tec.cod %></td>
             <td>
-                <a href="/admin/gerirTecnicos/{{this.cod}}"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
-                <a href="/admin/gerirTecnicos/delete/{{this.cod}}" onclick="return confirm('Tem a certeza que quer eliminar este registo?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                <a href="/admin/gerirTecnicos/<%= tec.cod %> "><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                <a href="/admin/gerirTecnicos/delete/<%= tec.cod %>" onclick="return confirm('Tem a certeza que quer eliminar este registo?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
             </td>
         </tr>
         <% } %>

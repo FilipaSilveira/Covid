@@ -47,7 +47,7 @@ router.post('/gerirTecnicos', (req, res) => {
         updateRecord(req, res);
 });
 
-function insertRecord(req, res) {
+async function insertRecord(req, res) {
     const tecnicos = new Tecnico();
         tecnicos.cod = req.body.cod;
         tecnicos.name = req.body.name;
@@ -57,33 +57,58 @@ function insertRecord(req, res) {
         tecnicos.mobile = req.body.mobile;
         tecnicos.city = req.body.city;
         tecnicos.password = req.body.password;
-        var lastid = 0;
-        Tecnico.find((err,tecnicos) => {
-            console.log(tecnicos);
-            lastid = tecnicos[0].cod;
-            console.log(lastid);
-        }).sort({cod: -1});
-        lastid = lastid + 1;
+        var lastid = await createId();
+        tecnicos.cod = lastid;
         tecnicos.save((err, doc) => {
             console.log(err);
-        if (!err)
+        if (!err){
+
             res.redirect('/admin/gerirTecnicos');
-        else {
+        }else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
                 res.render("gerirTecnicos/addOrEditTecn", {
                     tecnicos: req.body
                 });
-            }
-            else
+            }else{
                 console.log('Erro a fazer insert: ' + err);
+            }
         }
     });
 }
 
+async function createId() {
+    /*Tecnico.find((err,tecnicos) => {
+        console.log(tecnicos);
+        lastid = tecnicos[0].cod;
+        console.log(lastid);
+    }).sort({cod: -1});*/
+
+    return new Promise(function (resolve, reject) {
+        Tecnico.find((err, tecnicos) => {
+            console.log(tecnicos);
+            var lastid = 0;
+            if(tecnicos.length>0) {
+                lastid = tecnicos[0].cod;
+            }
+            lastid = lastid+1;
+            console.log(lastid);
+            if (lastid == undefined) {
+                resolve(false);
+            } else {
+                if (lastid != undefined && lastid != null) {
+                    resolve(lastid);
+                } else {
+                    resolve(false);
+                }
+            }
+        }).sort({cod: -1});
+    })
+}
+
 function updateRecord(req, res) {
     Tecnico.findOneAndUpdate({ cod: req.body.cod }, req.body, { new: true }, (err, doc) => {
-        if (!err) { res.redirect('gerirTecnicos/listaTecn'); }
+        if (!err) { res.redirect('/admin/gerirTecnicos'); }
         else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
@@ -136,9 +161,9 @@ router.get('/gerirTecnicos/:cod', (req, res) => {
 });
 
 router.get('/gerirTecnicos/delete/:cod', (req, res) => {
-    Tecnico.findByIdAndRemove(req.params.cod, (err, doc) => {
+    Tecnico.find(req.params.cod, (err, doc) => {
         if (!err) {
-            res.redirect('/gerirTecnicos/listaTecn');
+            res.redirect('/admin/gerirTecnicos');
         }
         else { console.log('Erro a apagar técnico :' + err); }
     });
