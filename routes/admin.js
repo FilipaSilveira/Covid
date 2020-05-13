@@ -23,20 +23,20 @@ router.get('/gerirTecnicos', (req, res) => {
                 //email:req.user.email
             });
         }
-    });
+    }).sort({cod: 1});
 });
 
 router.get('/addTecnico', (req, res) => {
-    var gerirTecnicos = {};
-    res.render('gerirTecnicos/addOrEditTecn', gerirTecnicos)
+    var tecnicos = {tecnicos: 1};
+    res.render('gerirTecnicos/addOrEditTecn', tecnicos)
 });
 
-router.post('/addTecnico', (req, res) => {
-    var gerirTecnicos = {};
+/*router.post('/addTecnico', (req, res) => {
+    var tecnicos = {};
     console.log(req.body.cod);
     console.log(req.body.name);
-    res.render('gerirTecnicos/addOrEditTecn', gerirTecnicos)
-});
+    res.render('gerirTecnicos/addOrEditTecn', tecnicos)
+});*/
 
 router.post('/gerirTecnicos', (req, res) => {
     console.log(req.body.name);
@@ -125,7 +125,7 @@ function updateRecord(req, res) {
 router.get('/gerirTecnicos/listaTecn', (req, res) => {
     Tecnico.find((err, docs) => {
         if (!err) {
-            res.render("/gerirTecnicos/listaTecn", {
+            res.render("gerirTecnicos/listaTecn", {
                 listaTecn: docs
             });
         }
@@ -150,10 +150,11 @@ function handleValidationError(err, body) {
     }
 }
 
-router.get('/gerirTecnicos/:cod', (req, res) => {
-    Tecnico.find({cod: req.params.cod}, (err, doc) => {
+router.get('/gerirTecnicos/editar/:cod', (req, res) => {
+    Tecnico.findOne({cod: req.params.cod}, (err, doc) => {
         if (!err) {
-            res.render("/gerirTecnicos/addOrEditTecn", {
+            console.log(doc);
+            res.render("gerirTecnicos/addOrEditTecn", {
                 tecnicos: doc
             });
         }
