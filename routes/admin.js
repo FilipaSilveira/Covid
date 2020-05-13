@@ -8,10 +8,14 @@ router.get('/', (req, res) => {
     res.render('administracao')
 });
 
+router.post('/', (req, res) => {
+    updateAdminRecord(req, res);
+});
+
 //Gerir os Técnicos (adicionar, editar e remover)
 router.get('/gerirTecnicos', (req, res) => {
     //res.render('gerirTecnicos/listaTecn')
-    Tecnico.find((err,tecnicos) => {
+    Tecnico.find({isAdmin: false}, (err,tecnicos) => {
         if(err){
             next(err);
         }else{
@@ -39,8 +43,6 @@ router.get('/addTecnico', (req, res) => {
 });*/
 
 router.post('/gerirTecnicos', (req, res) => {
-    console.log(req.body.name);
-    console.log(req.body.cod);
     if (req.body.cod == '')
         insertRecord(req, res);
         else
@@ -113,6 +115,23 @@ function updateRecord(req, res) {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
                 res.render("gerirTecnicos/addOrEditTecn", {
+                    tecnicos: req.body
+                });
+            }
+            else
+                console.log('Erro a fazer update: ' + err);
+        }
+    });
+}
+
+//fazer find de admin --> mudar pass e mandar body todo para update normal
+function updateAdminRecord(req, res) {
+    Tecnico.findOneAndUpdate({ cod: req.body.cod }, {password: req.body.password}, { new: true }, (err, doc) => {
+        if (!err) { res.redirect('/admin/gerirTecnicos'); }
+        else {
+            if (err.name == 'ValidationError') {
+                handleValidationError(err, req.body);
+                res.render("adminEdit", {
                     tecnicos: req.body
                 });
             }

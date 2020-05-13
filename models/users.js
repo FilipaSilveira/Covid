@@ -30,7 +30,10 @@ const usersSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    isAdmin: Boolean
+    isAdmin: {
+        type: Boolean,
+        default: false
+    }
 });
 
 // Custom validation for email
