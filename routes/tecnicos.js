@@ -43,8 +43,36 @@ function updateEstadoPaciente(req, res) {
         else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
-                res.render("gerirTecnicos/addOrEditTecn", {
-                    tecnicos: req.body
+                res.render("tecnicos/editTeste", {
+                    paciente: req.body
+                });
+            }
+            else
+                console.log('Erro a fazer update: ' + err);
+        }
+    });
+}
+
+router.post('/adicionar_teste', (req, res) => {
+    updateTeste(req, res);
+});
+
+function updateTeste(req, res) {
+    console.log(req.body.cod);
+    
+    const teste = new Teste();
+    teste.testeStatus = req.body.testeStatus;
+    teste.data = req.body.data;
+    teste.resultadoTeste = req.body.resultadoTeste;
+//todo --> add pdf
+
+    Paciente.findOneAndUpdate({ cod: req.body.cod }, {$push: {testes:teste}}, { new: true }, (err, doc) => {
+        if (!err) { res.redirect('/tecnicos/pedidos_novos/editar/' + req.body.cod); }
+        else {
+            if (err.name == 'ValidationError') {
+                handleValidationError(err, req.body);
+                res.render("tecnicos/editTeste", {
+                    paciente: req.body
                 });
             }
             else

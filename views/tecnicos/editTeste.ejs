@@ -10,28 +10,12 @@ Estado:
     <button type="submit" class="btn btn-info">Guardar</button>
 </form> 
 
-<tbody>
-    <% for ( var i = 0;  i < paciente.testes.length; i++) { %>       
-        <th scope="row"> teste# <%= i+1 %> </th>
-        <tr>
-        <td><%= paciente.testes[i].name %></td>
-        <td><%= paciente.testes[i].cod %></td>
-        <td>
-            <a href="/tecnicos/pedidos_novos/editar/<%= paciente.testes[i].cod %> "><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
-        </td>
-    </tr>
-    <% } %>
-</tbody>
-
-
-
-<form action="/ver_pedido" method="POST">
-    
+<form action="/tecnicos/adicionar_teste" method="POST">
     <div>
-        <label for="teste1">Teste 1:</label><br>
+        <input type="hidden" id="cod" name="cod" value="<%= paciente.cod %>"><br>
         <div>
-            <label for="estado">Estado:</label><br>
-            <input type="text" id="estado" name="estado"><br>
+            <label for="testeStatus">Estado:</label><br>
+            <input type="text" id="testeStatus" name="testeStatus"><br>
         </div>
         <div>
             <label for="teste">Teste:</label><br>
@@ -42,11 +26,22 @@ Estado:
             <input type="date" id="data" name="data">
         </div>
         <div>
-            <label for="resultado">Resultado:</label><br>
-            <input type="text" id="resultado" name="resultado"><br><br>
+            <label for="resultadoTeste">Resultado:</label><br>
+            <input type="text" id="resultadoTeste" name="resultadoTeste"><br><br>
         </div>
         <div>
             <input type="file" name="arquivos">
         </div>
     </div>
+    <button type="submit" class="btn btn-info">Guardar</button>
   </form>
+
+    <% for ( var i = 0;  i < paciente.testes.length; i++) { %>       
+      <h5>Teste <%= i+1 %></h5>   
+        <p>Status: <%= paciente.testes[i].testeStatus %></p>
+        <p>Data: <%= paciente.testes[i].data %></p>
+        <p>Resultado: <%= paciente.testes[i].resultadoTeste %></p>
+      
+        <!-- TODO_pdf -->
+        <a href="/tecnicos/pedidos_novos/editar/<%= paciente.testes[i].cod %> "><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+    <% } %>
