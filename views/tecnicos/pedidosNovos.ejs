@@ -1,12 +1,23 @@
-
-<form action="" method="get">
-    <ul style="list-style-type:none;">
-        <% for(var pedidos of arrayPedidos) { %>
-            <div class="boxed">            
-                <li><b>Nome: </b><%= pedidos.name %></li>
-                <li><b>Código: </b><%= pedidos.cod %></li>
-            <br><br>
+<h3>Pedidos Novos</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Código</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(var pac of listaPaciente) { %>       
+            <tr>
+            <td><%= pac.name %></td>
+            <td><%= pac.cod %></td>
+            <td>
+                <a href="/tecnicos/pedidos_novos/editar/<%= pac.cod %> "><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+            </td>
+        </tr>
         <% } %>
-    </ul>
-</form>
+    </tbody>
+</table>
+
  

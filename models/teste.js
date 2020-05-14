@@ -4,18 +4,17 @@
 const mongoose = require('mongoose');
 
 const testeSchema = mongoose.Schema({
-    estado: {
-        type: String,
-        require: true
-    },
-    teste: {
+    testeStatus: {
         type: String,
         require: true
     },
     data: {
         type: Date
     },
-    resultado: {
+    resultadoTeste: {
+        type: String
+    },
+    pdf: {
         type: String
     }
 });

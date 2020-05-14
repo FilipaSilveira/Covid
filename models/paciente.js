@@ -1,5 +1,4 @@
-//por campos 
-//array de testes -->testes.js
+//array de testes -->teste.js
 
 const mongoose = require('mongoose');
 
@@ -22,7 +21,15 @@ const pacienteSchema = mongoose.Schema({
     },
     sintomas: {
         type: String,
+    },
+    estado: {
+        type: String,
         require: true
+    },
+    testes:{ 
+        type: Array,
+        required: true,
+        "default": [] 
     }
 });
 
