@@ -1,12 +1,12 @@
 Nome:
-<%= paciente.name  %> 
+<%= paciente.name  %> <br>
 Código:
-<%= paciente.cod  %>
+<%= paciente.cod  %> <br>
 Estado:
-<%= paciente.estado %> 
+<%= paciente.estado %> <br>
 <form action="/tecnicos/mudar_estado" method="POST">
     <input type="hidden" id="cod" name="cod" value="<%= paciente.cod %>"><br>
-    <input type="text" id="estado" name="estado" value="<%= paciente.estado %>"><br>
+    <input type="text" id="estado" name="estado" value="<%= paciente.estado %>"><br><br>
     <button type="submit" class="btn btn-info">Guardar</button>
 </form> 
 
@@ -14,23 +14,19 @@ Estado:
     <div>
         <input type="hidden" id="cod" name="cod" value="<%= paciente.cod %>"><br>
         <div>
-            <label for="testeStatus">Estado:</label><br>
-            <input type="text" id="testeStatus" name="testeStatus"><br>
-        </div>
-        <div>
-            <label for="teste">Teste:</label><br>
-            <input type="text" id="testeResultado" name="testeResultado"><br><br>
+            <label for="testeStatus">Estado do Teste:</label><br>
+            <input type="text" id="testeStatus" name="testeStatus"><br><br>
         </div>
         <div>
             <label for="data">Data:</label>
-            <input type="date" id="data" name="data">
+            <input type="date" id="data" name="data"><br><br>
         </div>
         <div>
             <label for="resultadoTeste">Resultado:</label><br>
             <input type="text" id="resultadoTeste" name="resultadoTeste"><br><br>
         </div>
         <div>
-            <input type="file" name="arquivos">
+            <input type="file" name="arquivos"><br><br>
         </div>
     </div>
     <button type="submit" class="btn btn-info">Guardar</button>

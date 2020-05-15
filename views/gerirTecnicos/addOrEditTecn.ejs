@@ -1,8 +1,7 @@
+Código: <%= tecnicos.cod %>
+
 <form action="/admin/gerirTecnicos/" method="post">
-    <div class="form-group">
-        <label>Código</label>
-        <input type="number" class="form-control" name="cod" min="0" placeholder="Não preencher, o código é gerado automáticamente" value="<%= tecnicos.cod %>">
-    </div>
+    <input type="hidden" class="form-control" name="cod" min="0" placeholder="Não preencher, o código é gerado automáticamente" value="<%= tecnicos.cod %>">
     </div>
     <div class="form-group">
         <label>Nome</label>

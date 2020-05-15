@@ -1,15 +1,19 @@
-<form action="/ver_pedido" method="POST">
-    <div>
-        <label for="estado">Estado:</label><br>
-    </div>
-    <div>
-        <label for="teste">Teste:</label><br>
-    </div>
-    <div>
-        <label for="data">Data:</label>
-    </div>
-    <div>
-        <label for="resultado">Resultado:</label><br>
-    </div>
-    </div>
-  </form>
+Nome:
+<%= paciente.name  %> <br>
+Código:
+<%= paciente.cod  %><br><br>
+Estado:
+<%= paciente.estado %> <br>
+<form action="/tecnicos/mudar_estado" method="POST">
+    <input type="hidden" id="cod" name="cod" value="<%= paciente.cod %>"><br>
+</form> 
+
+
+
+    <% for ( var i = 0;  i < paciente.testes.length; i++) { %>       
+      <h5>Teste <%= i+1 %></h5>   
+        <p>Estado do Teste: <%= paciente.testes[i].testeStatus %></p>
+        <p>Data: <%= paciente.testes[i].data %></p>
+        <p>Resultado: <%= paciente.testes[i].resultadoTeste %></p><br>
+        <!-- TODO_pdf -->
+    <% } %> 

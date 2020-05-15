@@ -1,0 +1,21 @@
+<h3>Testes Em Espera</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Código</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(var pac of listaPaciente) { %>       
+            <tr>
+            <td><%= pac.name %></td>
+            <td><%= pac.cod %></td>
+            <td>
+                <a href="/tecnicos/pedidos_novos/editar/<%= pac.cod %> "><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+        <% } %>
+    </tbody>
+</table>

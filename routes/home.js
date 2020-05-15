@@ -6,8 +6,6 @@ router.get('/', (req, res) => {
     res.render('login')
 });
 
-
-
 /*router.post('/', async (req, res) =>{
     const post = new Home({
         user: req.body.user,
@@ -21,7 +19,7 @@ router.get('/', (req, res) => {
     }
 });*/
 
-//pacientes
+//PACIENTES
 //fazer_pedido
 router.get('/fazer_pedido', (req, res) => res.render('fazerPedido'));
 
@@ -52,14 +50,17 @@ router.post('/receber_pedido', function(req,res,next){
 });
 
 //ver_pedido
-router.get('/ver_pedido', (req, res) => {
-    res.render('verPedido');
-});
-
-router.post('/ver_pedido', (req, res) => {
+router.post('/ver_pedidos', (req, res) => {
     //receber o código
     //enviar informação
-    res.redirect('verPedido');
+    Paciente.findOne({cod: req.body.cod}, (err, doc) => {
+        if (!err) {
+            console.log(doc);
+            res.render("verPedido", {
+                paciente: doc
+            });
+        }
+    });
 });
 
 module.exports = router;

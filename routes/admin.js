@@ -8,48 +8,42 @@ router.get('/', (req, res) => {
     res.render('administracao')
 });
 
+
+//para mudar a password do admin
 router.post('/', (req, res) => {
     updateAdminRecord(req, res);
 });
 
+
 //Gerir os Técnicos (adicionar, editar e remover)
 router.get('/gerirTecnicos', (req, res) => {
-    //res.render('gerirTecnicos/listaTecn')
     Tecnico.find({isAdmin: false}, (err,tecnicos) => {
         if(err){
             next(err);
         }else{
-            //res.json(users);
-            //resultArray = users.slice();
-            //console.log(users);
             res.render('gerirTecnicos/listaTecn', {
                 listaTecn: tecnicos,
-                //email:req.user.email
             });
         }
     }).sort({cod: 1});
 });
 
+//adicionar
 router.get('/addTecnico', (req, res) => {
     var tecnicos = {tecnicos: 1};
     res.render('gerirTecnicos/addOrEditTecn', tecnicos)
 });
 
-/*router.post('/addTecnico', (req, res) => {
-    var tecnicos = {};
-    console.log(req.body.cod);
-    console.log(req.body.name);
-    res.render('gerirTecnicos/addOrEditTecn', tecnicos)
-});*/
-
+//adicionar ou editar
 router.post('/gerirTecnicos', (req, res) => {
     if (req.body.cod == '')
-        insertRecord(req, res);
+        insertTecnico(req, res);
         else
-        updateRecord(req, res);
+        updateTecnico(req, res);
 });
 
-async function insertRecord(req, res) {
+//função para adicionra tecnicos
+async function insertTecnico(req, res) {
     const tecnicos = new Tecnico();
         tecnicos.cod = req.body.cod;
         tecnicos.name = req.body.name;
@@ -64,7 +58,6 @@ async function insertRecord(req, res) {
         tecnicos.save((err, doc) => {
             console.log(err);
         if (!err){
-
             res.redirect('/admin/gerirTecnicos');
         }else {
             if (err.name == 'ValidationError') {
@@ -73,12 +66,13 @@ async function insertRecord(req, res) {
                     tecnicos: req.body
                 });
             }else{
-                console.log('Erro a fazer insert: ' + err);
+                console.log('Erro ao inserir: ' + err);
             }
         }
     });
 }
 
+//função para criar o Cod dos tecnicos
 async function createId() {
     /*Tecnico.find((err,tecnicos) => {
         console.log(tecnicos);
@@ -108,7 +102,8 @@ async function createId() {
     })
 }
 
-function updateRecord(req, res) {
+//função para editar tecnicos
+function updateTecnico(req, res) {
     Tecnico.findOneAndUpdate({ cod: req.body.cod }, req.body, { new: true }, (err, doc) => {
         if (!err) { res.redirect('/admin/gerirTecnicos'); }
         else {
@@ -125,6 +120,7 @@ function updateRecord(req, res) {
 }
 
 //fazer find de admin --> mudar pass e mandar body todo para update normal
+//Editar a password do ADMIN
 function updateAdminRecord(req, res) {
     Tecnico.findOneAndUpdate({ cod: req.body.cod }, {password: req.body.password}, { new: true }, (err, doc) => {
         if (!err) { res.redirect('/admin/gerirTecnicos'); }
@@ -141,6 +137,7 @@ function updateAdminRecord(req, res) {
     });
 }
 
+//Mostra a lista de Tecnicos
 router.get('/gerirTecnicos/listaTecn', (req, res) => {
     Tecnico.find((err, docs) => {
         if (!err) {
@@ -149,11 +146,12 @@ router.get('/gerirTecnicos/listaTecn', (req, res) => {
             });
         }
         else {
-            console.log('Error in retrieving lista de técnicos :' + err);
+            console.log('Erro ao recuperar lista de técnicos :' + err);
         }
     });
 });
 
+//Função para validar erros
 function handleValidationError(err, body) {
     for (field in err.errors) {
         switch (err.errors[field].path) {
@@ -169,6 +167,7 @@ function handleValidationError(err, body) {
     }
 }
 
+//Editar tecnicos pelo código
 router.get('/gerirTecnicos/editar/:cod', (req, res) => {
     Tecnico.findOne({cod: req.params.cod}, (err, doc) => {
         if (!err) {
@@ -180,6 +179,7 @@ router.get('/gerirTecnicos/editar/:cod', (req, res) => {
     });
 });
 
+//Eliminar tecnicos pelo código
 router.get('/gerirTecnicos/delete/:cod', (req, res) => {
     Tecnico.deleteOne({cod: req.params.cod}, (err, doc) => {
         if (!err) {
@@ -188,18 +188,6 @@ router.get('/gerirTecnicos/delete/:cod', (req, res) => {
         else { console.log('Erro a apagar técnico :' + err); }
     });
 });
-
-/*router.post('/gerirTecnicos', function(req,res,next){
-    const tecnicos = {
-        cod: req.body.cod,
-        name: req.body.name,
-        age: req.body.age,
-        sex: req.body.sex,
-        email: req.body.email,
-        mobile: req.body.mobile,
-        city: req.body.city
-    };
-});*/
 
 //ver informações pedidas no enunciado
 router.get('/informacoes', (req, res) => {
