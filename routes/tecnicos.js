@@ -94,12 +94,34 @@ function updateTeste(req, res) {
 //Mostrar testes agendados
 router.get('/agendados', (req, res) => {
     //Paciente.find({testes: {$elemMatch: {date: {$gte: (new Date()).toISOString()}}}}, (err, docs) => {
-    Paciente.find({'testes.date': {$gte: (new Date()).toISOString()}}, (err, docs) => {     
+    Paciente.find((err, docs) => {     
         if (!err) {
             console.log(docs);
+            var i;
+            var pacientes = [];
+            var d = new Date();
+            d.setDate(d.getDate());
+            d.setHours(0,0,0,0);
+            console.log(d);
+            for(i=0; i<docs.length; i++){
+                if(docs[i].testes.length > 0){
+                    if(docs[i].testes[docs[i].testes.length-1].data >= d){
+                        pacientes.push([docs[i], docs[i].testes[docs[i].testes.length-1].data]);
+                    }
+                }
+            }
+            function Comparator(a, b) {
+                if (a[1] < b[1]) return -1;
+                if (a[1] > b[1]) return 1;
+                return 0;
+              }
+             
+              pacientes = pacientes.sort(Comparator);
+              console.log(pacientes);
+
             console.log((new Date()).toISOString());
             res.render("tecnicos/agendados", {
-                listaPaciente: docs
+                listaPaciente: pacientes
             });
         }
         else {
@@ -107,6 +129,7 @@ router.get('/agendados', (req, res) => {
         }
     });
 });
+
 
 
 //EM ESPERA

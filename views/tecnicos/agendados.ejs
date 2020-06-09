@@ -4,16 +4,18 @@
         <tr>
             <th>Nome</th>
             <th>Código</th>
+            <th>Data</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         <% for(var pac of listaPaciente) { %>       
             <tr>
-            <td><%= pac.name %></td>
-            <td><%= pac.cod %></td>
+            <td><%= pac[0].name %></td>
+            <td><%= pac[0].cod %></td>
+            <td><%= pac[0].testes[pac[0].testes.length-1].data.toDateString() %></td>
             <td>
-                <a href="/tecnicos/pedidos_novos/editar/<%= pac.cod %> "><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                <a href="/tecnicos/pedidos_novos/editar/<%= pac[0].cod %> "><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
             </td>
         </tr>
         <% } %>
