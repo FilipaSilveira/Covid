@@ -187,15 +187,37 @@ router.get('/agendados', (req, res) => {
 //EM ESPERA
 //Mostrar testes a espera do resultado
 router.get('/espera', (req, res) => {
-    Paciente.find({testes: {$gt: 0}}, (err, docs) => {
+    Paciente.find((err, docs) => {     
         if (!err) {
             console.log(docs);
-            res.render("tecnicos/emEspera", {
-                listaPaciente: docs
+            var i;
+            var pacientes = [];
+            var d = new Date();
+            d.setDate(d.getDate());
+            d.setHours(0,0,0,0);
+            console.log(d);
+            for(i=0; i<docs.length; i++){
+                if(docs[i].testes.length > 0){
+                    if(docs[i].testes[docs[i].testes.length-1].data >= d && docs[i].testes[docs[i].testes.length-1].testeStatus == "Em espera"){
+                        pacientes.push([docs[i], docs[i].testes[docs[i].testes.length-1].data]);
+                    }
+                }
+            }
+            function Comparator(a, b) {
+                if (a[1] < b[1]) return -1;
+                if (a[1] > b[1]) return 1;
+                return 0;
+              }
+              pacientes = pacientes.sort(Comparator);
+              console.log(pacientes);
+              
+            console.log((new Date()).toISOString());
+            res.render("tecnicos/agendados", {
+                listaPaciente: pacientes
             });
         }
         else {
-            console.log('Erro' + err);
+            console.log('Erro:' + err);
         }
     });
 });
