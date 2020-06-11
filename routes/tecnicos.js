@@ -57,16 +57,16 @@ router.get('/editar_teste/:cod_user/:pos_teste', (req, res) => {
 });
 
 function updateTestes(req, res){
-    console.log("-------------");
-    console.log(req.params.cod_user);
-    console.log(req.body.data);
-    console.log(new Date(req.body.data));
+    //console.log("-------------");
+    //console.log(req.params.cod_user);
+    //console.log(req.body.data);
+    //console.log(new Date(req.body.data));
     const teste = new Teste();
     teste.testeStatus = req.body.testeStatus;
     teste.data = req.body.data;
     teste.resultadoTeste = req.body.resultadoTeste;
 //todo --> add pdf
-    Paciente.findOneAndUpdate({ cod: req.params.cod_user, "testes.data": new Date(req.body.data)}, {$set: {"testes.$.testeStatus":teste.testeStatus}}, (err, doc) => {
+    Paciente.findOneAndUpdate({ cod: req.params.cod_user, "testes.data": new Date(req.body.data)}, {$set: {"testes.$.testeStatus":teste.testeStatus, "testes.$.resultadoTeste":teste.resultadoTeste}}, (err, doc) => {
         if (!err) { 
             console.log("funcionou");
             res.redirect('/tecnicos/pedidos_novos/editar/' + req.params.cod_user); 
@@ -158,7 +158,7 @@ router.get('/agendados', (req, res) => {
             console.log(d);
             for(i=0; i<docs.length; i++){
                 if(docs[i].testes.length > 0){
-                    if(docs[i].testes[docs[i].testes.length-1].data >= d){
+                    if(docs[i].testes[docs[i].testes.length-1].data >= d && docs[i].testes[docs[i].testes.length-1].testeStatus == ""){
                         pacientes.push([docs[i], docs[i].testes[docs[i].testes.length-1].data]);
                     }
                 }
