@@ -218,7 +218,8 @@ router.get('/informacoes', (req, res) => {
                 }
             }
             res.render("infoGerais", {
-                countInfetados: pacientes
+                countInfetados: pacientes,
+                informacoes2: false
             });
         }
         else {
@@ -226,6 +227,25 @@ router.get('/informacoes', (req, res) => {
         }
     });
 });
+
+router.post('/informacoes2', (req, res) => {
+    Paciente.findOne({ cod: req.body.cod }, (err, doc) => {
+        if (!err) { 
+            res.render("infoGerais", {
+                informacoes2: doc,
+                countInfetados: req.body.countInfetados
+            }); 
+        }
+        else {
+            if (err.name == 'ValidationError') {
+                handleValidationError(err, req.body);
+                res.redirect("admin/informacoes", {});
+            }
+            else
+                console.log('Erro a fazer update: ' + err);
+        }
+    });
+})
 
 ///id 
 

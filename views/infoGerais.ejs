@@ -1,12 +1,33 @@
-<form action="/admin/informacoes" method="GET">
-    <div>
-        <label>Testes realizados no dia:</label>
-        
-    </div>
-    <div>
-        <label>Testes realizados pela pessoa:</label>
-    </div>
-    <div>
-        <label>Número de pessoas infetadas: <%= countInfetados %></label>
-    </div>
+<form action="/admin/informacoes1" method="GET">
+    <label>Testes realizados no dia:</label>
 </form>
+
+<form action="/admin/informacoes2" method="POST">
+    <label>Testes realizados pela pessoa:</label>
+    <input type="number" class="form-control" name="cod" id="cod">
+    <input type="hidden" class="form-control" name="countInfetados" id="countInfetados" value="<%= countInfetados %> ">
+    <button type="submit" class="btn btn-info">Pesquisar</button>
+</form>
+
+
+<% if(informacoes2){ %>
+    Nome:
+    <%= informacoes2.name  %> <br>
+    Código:
+    <%= informacoes2.cod  %> <br>
+    Estado:
+    <%= informacoes2.estado %> <br>
+    
+        <% for ( var i = 0;  i < informacoes2.testes.length; i++) { %>       
+          <h5>Teste <%= i+1 %></h5>   
+            <p>Status: <%= informacoes2.testes[i].testeStatus %></p>
+            <p>Data: <%= informacoes2.testes[i].data %></p>
+            <p>Resultado: <%= informacoes2.testes[i].resultadoTeste %></p>
+          
+            <!-- TODO_pdf -->
+        <% } %>
+<% } %> 
+
+<div>
+    <label>Número de pessoas infetadas: <%= countInfetados %></label>
+</div>

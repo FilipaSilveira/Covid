@@ -88,7 +88,7 @@ router.post('/editar_testes/:cod_user/:pos_teste', (req, res) => {
     console.log("iebefb");
     updateTestes(req, res);
     console.log("iebefb");
-})
+});
 
 
 //Mudar o estado do paciente (suspeito, infetado, não infetado)
