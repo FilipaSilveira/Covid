@@ -226,15 +226,47 @@ router.get('/espera', (req, res) => {
 //REALIZADOS
 //Mostrar testes já realizados e com resultado
 router.get('/realizados', (req, res) => {
-    Paciente.find({testes: {$gt: 0}}, (err, docs) => {
+    Paciente.find((err, docs) => {     
         if (!err) {
             console.log(docs);
-            res.render("tecnicos/realizados", {
-                listaPaciente: docs
+            var i;
+            var pacientes = [];
+            var nao_infetados = [];
+            var d = new Date();
+            d.setDate(d.getDate());
+            d.setHours(0,0,0,0);
+            console.log(d);
+            for(i=0; i<docs.length; i++){
+                if(docs[i].testes.length > 0){
+                    if(docs[i].testes[docs[i].testes.length-1].data >= d && docs[i].testes[docs[i].testes.length-1].testeStatus == "Realizado"){
+                        pacientes.push([docs[i], docs[i].testes[docs[i].testes.length-1].data]);
+                        if(docs[i].testes.length >= 2){
+                            if(docs[i].testes[docs[i].testes.length-1].resultadoTeste == "Negativo" && docs[i].testes[docs[i].testes.length-2].resultadoTeste == "Negativo"){
+                                nao_infetados.push(docs[i]);
+                            }else{
+                                pacientes.push(docs[i]);
+                            }
+                        }else{
+                            pacientes.push(docs[i]);
+                        }
+                    }
+                }
+            }
+            function Comparator(a, b) {
+                if (a[1] < b[1]) return -1;
+                if (a[1] > b[1]) return 1;
+                return 0;
+              }
+              pacientes = pacientes.sort(Comparator);
+              console.log(pacientes);
+              
+            console.log((new Date()).toISOString());
+            res.render("tecnicos/agendados", {
+                listaPaciente: pacientes
             });
         }
         else {
-            console.log('Error in retrieving lista de pacientes :' + err);
+            console.log('Erro:' + err);
         }
     });
 });
