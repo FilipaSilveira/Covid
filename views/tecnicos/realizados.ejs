@@ -1,21 +1,54 @@
+<style>
+    .inlineTable {
+            display: inline-block;
+        }
+</style>
+
 <h3>Testes Realizados</h3>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Código</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <% for(var pac of listaPaciente) { %>       
-            <tr>
-            <td><%= pac.name %></td>
-            <td><%= pac.cod %></td>
-            <td>
-                <a href="/tecnicos/pedidos_novos/editar/<%= pac.cod %> "><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
-            </td>
-        </tr>
-        <% } %>
-    </tbody>
-</table>
+
+        <h2>Infetados</h2>
+        <table class="table table-striped inlineTable">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Código</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var pac of listaPaciente) { %>       
+                    <tr>
+                    <td><%= pac[0].name %></td>
+                    <td><%= pac[0].cod %></td>
+                    <td>
+                        <a href="/tecnicos/pedidos_novos/editar/<%= pac[0].cod %> "><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    
+
+    
+        <h2>Não Infetados</h2>
+        <table class="table table-striped inlineTable">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Código</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var pac of listaNaoInfetados) { %>       
+                    <tr>
+                    <td><%= pac[0].name %></td>
+                    <td><%= pac[0].cod %></td>
+                    <td>
+                        <a href="/tecnicos/pedidos_novos/editar/<%= pac[0].cod %> "><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+

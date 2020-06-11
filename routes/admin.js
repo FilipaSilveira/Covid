@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Tecnico = require('../models/users');
+const Paciente = require('../models/paciente');
 
 //pagina inicial do administrador
 router.get('/', (req, res) => {
@@ -191,7 +192,39 @@ router.get('/gerirTecnicos/delete/:cod', (req, res) => {
 
 //ver informações pedidas no enunciado
 router.get('/informacoes', (req, res) => {
-    res.render('infoGerais')
+    Paciente.find((err, docs) => {     
+        if (!err) {
+            console.log(docs);
+            var i;
+            var pacientes = 0;
+            var d = new Date();
+            d.setDate(d.getDate());
+            d.setHours(0,0,0,0);
+            console.log(d);
+            for(i=0; i<docs.length; i++){
+                if(docs[i].testes.length > 0){
+                    if(docs[i].testes[docs[i].testes.length-1].data >= d && docs[i].testes[docs[i].testes.length-1].testeStatus == "Realizado"){
+                        //pacientes.push([docs[i], docs[i].testes[docs[i].testes.length-1].data]);
+                        if(docs[i].testes.length >= 2){
+                            if(docs[i].testes[docs[i].testes.length-1].resultadoTeste == "Negativo" && docs[i].testes[docs[i].testes.length-2].resultadoTeste == "Negativo"){
+                               
+                            }else{
+                                pacientes++;
+                            }
+                        }else{
+                            pacientes++;
+                        }
+                    }
+                }
+            }
+            res.render("infoGerais", {
+                countInfetados: pacientes
+            });
+        }
+        else {
+            console.log('Erro:' + err);
+        }
+    });
 });
 
 ///id 

@@ -212,7 +212,7 @@ router.get('/espera', (req, res) => {
               console.log(pacientes);
               
             console.log((new Date()).toISOString());
-            res.render("tecnicos/agendados", {
+            res.render("tecnicos/emEspera", {
                 listaPaciente: pacientes
             });
         }
@@ -239,15 +239,15 @@ router.get('/realizados', (req, res) => {
             for(i=0; i<docs.length; i++){
                 if(docs[i].testes.length > 0){
                     if(docs[i].testes[docs[i].testes.length-1].data >= d && docs[i].testes[docs[i].testes.length-1].testeStatus == "Realizado"){
-                        pacientes.push([docs[i], docs[i].testes[docs[i].testes.length-1].data]);
+                        //pacientes.push([docs[i], docs[i].testes[docs[i].testes.length-1].data]);
                         if(docs[i].testes.length >= 2){
                             if(docs[i].testes[docs[i].testes.length-1].resultadoTeste == "Negativo" && docs[i].testes[docs[i].testes.length-2].resultadoTeste == "Negativo"){
-                                nao_infetados.push(docs[i]);
+                                nao_infetados.push([docs[i], docs[i].testes[docs[i].testes.length-1].data]);
                             }else{
-                                pacientes.push(docs[i]);
+                                pacientes.push([docs[i], docs[i].testes[docs[i].testes.length-1].data]);
                             }
                         }else{
-                            pacientes.push(docs[i]);
+                            pacientes.push([docs[i], docs[i].testes[docs[i].testes.length-1].data]);
                         }
                     }
                 }
@@ -258,10 +258,66 @@ router.get('/realizados', (req, res) => {
                 return 0;
               }
               pacientes = pacientes.sort(Comparator);
+              nao_infetados = nao_infetados.sort(Comparator);
+              
+              console.log("-----------------");
+              console.log(pacientes);
+              console.log(nao_infetados);
+              
+            console.log((new Date()).toISOString());
+            res.render("tecnicos/realizados", {
+                listaPaciente: pacientes,
+                listaNaoInfetados: nao_infetados
+            });
+        }
+        else {
+            console.log('Erro:' + err);
+        }
+    });
+});
+
+
+//REMARCAÇÕES
+router.get('/remarcacoes', (req, res) => {
+    Paciente.find((err, docs) => {     
+        if (!err) {
+            console.log(docs);
+            var i;
+            var pacientes = [];
+            var d = new Date();
+            d.setDate(d.getDate());
+            d.setHours(0,0,0,0);
+            //console.log(d);
+            for(i=0; i<docs.length; i++){
+                if(docs[i].testes.length > 0){
+                    if(docs[i].testes[docs[i].testes.length-1].data >= d && docs[i].testes[docs[i].testes.length-1].testeStatus == "Realizado"){
+                        //pacientes.push([docs[i], docs[i].testes[docs[i].testes.length-1].data]);
+                        if(docs[i].testes.length >= 2){
+                            if(docs[i].testes[docs[i].testes.length-1].resultadoTeste == "Negativo" && docs[i].testes[docs[i].testes.length-2].resultadoTeste == "Positivo"){
+                                pacientes.push([docs[i], docs[i].testes[docs[i].testes.length-1].data]);
+                            }
+                        }else{
+                            if(docs[i].testes.length == 1){
+                                if(docs[i].testes[docs[i].testes.length-1].resultadoTeste == "Negativo"){
+                                    pacientes.push([docs[i], docs[i].testes[docs[i].testes.length-1].data]);
+                                }
+                            }   
+                        }
+                    }
+                }
+            }
+            function Comparator(a, b) {
+                if (a[1] < b[1]) return -1;
+                if (a[1] > b[1]) return 1;
+                return 0;
+              }
+              pacientes = pacientes.sort(Comparator);
+              
+              console.log("-----------------");
               console.log(pacientes);
               
             console.log((new Date()).toISOString());
-            res.render("tecnicos/agendados", {
+            res.render("tecnicos/remarcacoes", {
                 listaPaciente: pacientes
             });
         }
