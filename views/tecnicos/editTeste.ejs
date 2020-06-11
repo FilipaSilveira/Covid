@@ -39,5 +39,5 @@ Estado:
         <p>Resultado: <%= paciente.testes[i].resultadoTeste %></p>
       
         <!-- TODO_pdf -->
-        <a href="/tecnicos/pedidos_novos/editar/<%= paciente.testes[i].cod %> "><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+        <a href="/tecnicos/editar_teste/<%= paciente.cod %>/<%= i %> "><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
     <% } %>

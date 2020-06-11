@@ -37,6 +37,59 @@ router.get('/pedidos_novos/editar/:cod', (req, res) => {
     });
 });
 
+//editar testes agendados 
+router.get('/editar_teste/:cod_user/:pos_teste', (req, res) => {
+    Paciente.findOne({cod: req.params.cod_user}, (err, doc) => {
+        if (!err) {
+            //console.log(doc.testes[req.params.pos_teste]);
+            console.log("cscnncv");
+            console.log( doc.testes[req.params.pos_teste].data);
+            res.render("tecnicos/edit_Testes", {
+                teste: doc.testes[req.params.pos_teste],
+                paciente_cod: req.params.cod_user, 
+                pos_teste: req.params.pos_teste,
+            });
+        }
+        else {
+            console.log("nkcbewubv");
+        }
+    });
+});
+
+function updateTestes(req, res){
+    console.log("-------------");
+    console.log(req.params.cod_user);
+    console.log(req.body.data);
+    console.log(new Date(req.body.data));
+    const teste = new Teste();
+    teste.testeStatus = req.body.testeStatus;
+    teste.data = req.body.data;
+    teste.resultadoTeste = req.body.resultadoTeste;
+//todo --> add pdf
+    Paciente.findOneAndUpdate({ cod: req.params.cod_user, "testes.data": new Date(req.body.data)}, {$set: {"testes.$.testeStatus":teste.testeStatus}}, (err, doc) => {
+        if (!err) { 
+            console.log("funcionou");
+            res.redirect('/tecnicos/pedidos_novos/editar/' + req.params.cod_user); 
+        }
+        else {
+            if (err.name == 'ValidationError') {
+                handleValidationError(err, req.body);
+                res.render("/tecnicos/pedidos_novos/editar/", {
+                    paciente: req.body
+                });
+            }
+            else
+                console.log('Erro a fazer update: ' + err);
+        }
+    });
+}
+
+router.post('/editar_testes/:cod_user/:pos_teste', (req, res) => {
+    console.log("iebefb");
+    updateTestes(req, res);
+    console.log("iebefb");
+})
+
 
 //Mudar o estado do paciente (suspeito, infetado, não infetado)
 router.post('/mudar_estado', (req, res) => {
@@ -115,10 +168,9 @@ router.get('/agendados', (req, res) => {
                 if (a[1] > b[1]) return 1;
                 return 0;
               }
-             
               pacientes = pacientes.sort(Comparator);
               console.log(pacientes);
-
+              
             console.log((new Date()).toISOString());
             res.render("tecnicos/agendados", {
                 listaPaciente: pacientes
