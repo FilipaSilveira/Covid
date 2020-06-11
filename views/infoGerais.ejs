@@ -1,6 +1,13 @@
-<form action="/admin/informacoes1" method="GET">
+<form action="/admin/informacoes1" method="POST">
     <label>Testes realizados no dia:</label>
+    <input type="date" id="data" name="data"><br>
+    <input type="hidden" class="form-control" name="countInfetados" id="countInfetados" value="<%= countInfetados %> ">
+    <button type="submit" class="btn btn-info">Pesquisar</button>
 </form>
+
+<% if(informacoes1){ %>
+    Número de Infetados: <%= countTestes  %> <br>
+<% } %>
 
 <form action="/admin/informacoes2" method="POST">
     <label>Testes realizados pela pessoa:</label>

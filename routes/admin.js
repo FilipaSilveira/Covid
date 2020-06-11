@@ -219,7 +219,8 @@ router.get('/informacoes', (req, res) => {
             }
             res.render("infoGerais", {
                 countInfetados: pacientes,
-                informacoes2: false
+                informacoes2: false,
+                informacoes1: false
             });
         }
         else {
@@ -233,6 +234,45 @@ router.post('/informacoes2', (req, res) => {
         if (!err) { 
             res.render("infoGerais", {
                 informacoes2: doc,
+                informacoes1: false,
+                countInfetados: req.body.countInfetados
+            }); 
+        }
+        else {
+            if (err.name == 'ValidationError') {
+                handleValidationError(err, req.body);
+                res.redirect("admin/informacoes", {});
+            }
+            else
+                console.log('Erro a fazer update: ' + err);
+        }
+    });
+})
+
+router.post('/informacoes1', (req, res) => {
+    Paciente.find({}, (err, doc) => {
+        if (!err) { 
+            console.log("--------------");
+            var countTestes = 0;
+            var i;
+            var d = new Date(req.body.data);
+            d.setDate(d.getDate());
+            d.setHours(0,0,0,0);
+            console.log(d);
+            console.log(req.body.data);
+            for(i=0; i<doc.length; i++){
+                var j;
+                for(j=0; j<doc[i].testes.length; j++){
+                    console.log(doc[i].testes[j].data);
+                    if(req.body.data == doc[i].testes[j].data.getDate()){
+                        countTestes++;
+                    }
+                }
+            }
+            console.log(countTestes);
+            res.render("infoGerais", {
+                informacoes1: countTestes,
+                informacoes2: false,
                 countInfetados: req.body.countInfetados
             }); 
         }
