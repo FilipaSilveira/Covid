@@ -75,21 +75,13 @@ async function insertTecnico(req, res) {
 
 //função para criar o Cod dos tecnicos
 async function createId() {
-    /*Tecnico.find((err,tecnicos) => {
-        console.log(tecnicos);
-        lastid = tecnicos[0].cod;
-        console.log(lastid);
-    }).sort({cod: -1});*/
-
     return new Promise(function (resolve, reject) {
         Tecnico.find((err, tecnicos) => {
-            console.log(tecnicos);
             var lastid = 0;
             if(tecnicos.length>0) {
                 lastid = tecnicos[0].cod;
             }
             lastid = lastid+1;
-            console.log(lastid);
             if (lastid == undefined) {
                 resolve(false);
             } else {
@@ -172,7 +164,6 @@ function handleValidationError(err, body) {
 router.get('/gerirTecnicos/editar/:cod', (req, res) => {
     Tecnico.findOne({cod: req.params.cod}, (err, doc) => {
         if (!err) {
-            console.log(doc);
             res.render("gerirTecnicos/addOrEditTecn", {
                 tecnicos: doc
             });
