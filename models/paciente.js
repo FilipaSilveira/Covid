@@ -19,6 +19,9 @@ const pacienteSchema = mongoose.Schema({
         type: String,
         require: true
     },
+    prioritario: {
+        type: Boolean,
+    },
     sintomas: {
         type: String,
     },

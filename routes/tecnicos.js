@@ -13,8 +13,19 @@ router.get('/pedidos_novos', (req, res) => {
     Paciente.find({testes: {$size: 0}}, (err, docs) => {
         if (!err) {
             console.log(docs);
+            var prioritarios = [];
+            var naoPrioritarios = [];
+            var i;
+            for(i=0; i<docs.length; i++){
+                if(docs[i].prioritario){
+                    prioritarios.push(docs[i]);
+                }else{
+                    naoPrioritarios.push(docs[i]);
+                }
+            }
             res.render("tecnicos/pedidosNovos", {
-                listaPaciente: docs
+                listaPaciente: prioritarios,
+                listaP: naoPrioritarios
             });
         }
         else {
@@ -26,7 +37,7 @@ router.get('/pedidos_novos', (req, res) => {
 
 /*Editar pedidos novos, neste caso irá ser atribuida uma data
 para a realiação do teste*/
-router.get('/pedidos_novos/editar/:cod', (req, res) => {
+/*router.get('/pedidos_novos/editar/:cod', (req, res) => {
     Paciente.findOne({cod: req.params.cod}, (err, doc) => {
         if (!err) {
             console.log(doc);
@@ -35,7 +46,30 @@ router.get('/pedidos_novos/editar/:cod', (req, res) => {
             });
         }
     });
+});*/
+
+router.get('/pedidos_novos/editarMin/:cod', (req, res) => {
+    Paciente.findOne({cod: req.params.cod}, (err, doc) => {
+        if (!err) {
+            console.log(doc);
+            res.render("tecnicos/editTesteMin", {
+                paciente: doc
+            });
+        }
+    });
 });
+
+router.get('/pedidos_novos/editarMinMin/:cod', (req, res) => {
+    Paciente.findOne({cod: req.params.cod}, (err, doc) => {
+        if (!err) {
+            console.log(doc);
+            res.render("tecnicos/editTesteMinMin", {
+                paciente: doc
+            });
+        }
+    });
+});
+
 
 //editar testes agendados 
 router.get('/editar_teste/:cod_user/:pos_teste', (req, res) => {
@@ -57,19 +91,21 @@ router.get('/editar_teste/:cod_user/:pos_teste', (req, res) => {
 });
 
 function updateTestes(req, res){
-    //console.log("-------------");
-    //console.log(req.params.cod_user);
-    //console.log(req.body.data);
-    //console.log(new Date(req.body.data));
     const teste = new Teste();
     teste.testeStatus = req.body.testeStatus;
     teste.data = req.body.data;
     teste.resultadoTeste = req.body.resultadoTeste;
-//todo --> add pdf
+    //todo --> add pdf
     Paciente.findOneAndUpdate({ cod: req.params.cod_user, "testes.data": new Date(req.body.data)}, {$set: {"testes.$.testeStatus":teste.testeStatus, "testes.$.resultadoTeste":teste.resultadoTeste}}, (err, doc) => {
         if (!err) { 
             console.log("funcionou");
-            res.redirect('/tecnicos/pedidos_novos/editar/' + req.params.cod_user); 
+            //res.redirect('/tecnicos/pedidos_novos/editar/' + req.params.cod_user);
+
+            if(req.body.render == "Min"){
+                res.redirect('/tecnicos/pedidos_novos/editarMin/' + req.params.cod_user);
+            }else{
+                res.redirect('/tecnicos/pedidos_novos/editarMinMin/' + req.params.cod_user);
+            }
         }
         else {
             if (err.name == 'ValidationError') {
@@ -100,7 +136,7 @@ router.post('/mudar_estado', (req, res) => {
 function updateEstadoPaciente(req, res) {
     console.log(req.body.cod);
     Paciente.findOneAndUpdate({ cod: req.body.cod }, req.body, { new: true }, (err, doc) => {
-        if (!err) { res.redirect('/tecnicos/pedidos_novos/editar/' + req.body.cod); }
+        if (!err) { res.redirect('/tecnicos/pedidos_novos/editarMinMin/' + req.body.cod); }
         else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
@@ -126,10 +162,16 @@ function updateTeste(req, res) {
     teste.testeStatus = req.body.testeStatus;
     teste.data = req.body.data;
     teste.resultadoTeste = req.body.resultadoTeste;
-//todo --> add pdf
+    //todo --> add pdf
     Paciente.findOneAndUpdate({ cod: req.body.cod }, {$push: {testes:teste}}, { new: true }, (err, doc) => {
-        if (!err) { res.redirect('/tecnicos/pedidos_novos/editar/' + req.body.cod); }
-        else {
+        if (!err) { 
+            //res.redirect('/tecnicos/pedidos_novos/editar/' + req.body.cod); 
+            if(req.body.render == "Min"){
+                res.redirect('/tecnicos/pedidos_novos/editarMin/' + req.body.cod);
+            }else{
+                res.redirect('/tecnicos/pedidos_novos/editarMinMin/' + req.body.cod);
+            }
+        }else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
                 res.render("tecnicos/editTeste", {

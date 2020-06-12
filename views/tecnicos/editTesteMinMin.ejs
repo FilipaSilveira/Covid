@@ -1,0 +1,44 @@
+Nome:
+<%= paciente.name  %> <br>
+Código:
+<%= paciente.cod  %> <br>
+Estado:
+<%= paciente.estado %> <br>
+<form action="/tecnicos/mudar_estado" method="POST">
+    <input type="hidden" id="cod" name="cod" value="<%= paciente.cod %>"><br>
+    <input type="text" id="estado" name="estado" value="<%= paciente.estado %>"><br><br>
+    <button type="submit" class="btn btn-info">Guardar</button>
+</form> 
+
+<form action="/tecnicos/adicionar_teste" method="POST">
+    <div>
+        <input type="hidden" id="cod" name="cod" value="<%= paciente.cod %>"><br>
+        <input type="hidden" id="render" name="render" value="MinMin"><br>
+        <div>
+            <!--<label for="testeStatus">Estado do Teste:</label><br>-->
+            <input type="hidden" id="testeStatus" name="testeStatus"><br><br>
+        </div>
+        <div>
+            <!--<label for="data">Data:</label>-->
+            <input type="hidden" id="data" name="data"><br><br>
+        </div>
+        <div>
+            <!--<label for="resultadoTeste">Resultado:</label><br>-->
+            <input type="hidden" id="resultadoTeste" name="resultadoTeste"><br><br>
+        </div>
+        <div>
+            <!--<input type="file" name="arquivos"><br><br>-->
+        </div>
+    </div>
+    <!--<button type="submit" class="btn btn-info">Guardar</button>-->
+  </form>
+
+    <% for ( var i = 0;  i < paciente.testes.length; i++) { %>       
+      <h5>Teste <%= i+1 %></h5>   
+        <p>Status: <%= paciente.testes[i].testeStatus %></p>
+        <p>Data: <%= paciente.testes[i].data %></p>
+        <p>Resultado: <%= paciente.testes[i].resultadoTeste %></p>
+        <!-- TODO_pdf -->
+        
+        <a href="/tecnicos/editar_teste/<%= paciente.cod %>/<%= i %> "><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+    <% } %>
