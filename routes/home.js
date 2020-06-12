@@ -45,8 +45,6 @@ async function createId() {
     })
 }
 
-
-//todo --> tratar cenas de info relevante
 async function insertPaciente(req, res) {
     const paciente = new Paciente();
     var lastid = await createId();
@@ -67,7 +65,10 @@ async function insertPaciente(req, res) {
     paciente.save((err, doc) => {
     console.log(err);
     if (!err){
-        res.redirect('/');
+        res.redirect('/ver_pedido/' + lastid);
+
+
+
     }else {
         if (err.name == 'ValidationError') {
              handleValidationError(err, req.body);
@@ -80,10 +81,6 @@ async function insertPaciente(req, res) {
     }  
     });
 }
-
-
-
-
 
 router.post('/receber_pedido', function(req,res,next){
     insertPaciente(req, res);
@@ -121,6 +118,17 @@ router.post('/ver_pedidos', (req, res) => {
     //receber o código
     //enviar informação
     Paciente.findOne({cod: req.body.cod}, (err, doc) => {
+        if (!err) {
+            console.log(doc);
+            res.render("verPedido", {paciente: doc});
+        }
+    });
+});
+
+router.get('/ver_pedido/:cod', (req, res) => {
+    //receber o código
+    //enviar informação
+    Paciente.findOne({cod: req.params.cod}, (err, doc) => {
         if (!err) {
             console.log(doc);
             res.render("verPedido", {paciente: doc});
