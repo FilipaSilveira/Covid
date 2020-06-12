@@ -1,0 +1,353 @@
+[{
+  "_id": {
+    "$oid": "5ee2cb02dbc5000774e46dc2"
+  },
+  "testes": [
+    {
+      "_id": {
+        "$oid": "5ee2d7bad825e03ee4c0c91e"
+      },
+      "data": {
+        "$date": "2020-06-15T00:00:00Z"
+      }
+    }
+  ],
+  "cod": 1,
+  "name": "Filipa",
+  "age": 22,
+  "sex": "feminino",
+  "sintomas": "Febre",
+  "estado": "suspeito",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee2cb12dbc5000774e46dc3"
+  },
+  "testes": [
+    {
+      "_id": {
+        "$oid": "5ee2d928d3030516f482a911"
+      },
+      "testeStatus": "Realizado",
+      "data": {
+        "$date": "2020-06-15T00:00:00Z"
+      },
+      "resultadoTeste": "Negativo"
+    },
+    {
+      "_id": {
+        "$oid": "5ee2e1db5687e02528d6d10e"
+      },
+      "testeStatus": "Realizado",
+      "data": {
+        "$date": "2020-06-18T00:00:00Z"
+      },
+      "resultadoTeste": "Positivo"
+    }
+  ],
+  "cod": 2,
+  "name": "Ana Filipa Sousa Silveira",
+  "age": 23,
+  "sex": "feminino",
+  "sintomas": "Tosse",
+  "estado": "Infetado",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee2cb23dbc5000774e46dc4"
+  },
+  "testes": [
+    {
+      "_id": {
+        "$oid": "5ee2e1095687e02528d6d106"
+      },
+      "testeStatus": "Realizado",
+      "data": {
+        "$date": "2020-06-15T00:00:00Z"
+      },
+      "resultadoTeste": "Positivo"
+    }
+  ],
+  "cod": 3,
+  "name": "Miguel",
+  "age": 12,
+  "sex": "masculino",
+  "sintomas": "Dor de cabeça",
+  "estado": "Infetado",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee2cba8dbc5000774e46dc5"
+  },
+  "testes": [
+    {
+      "_id": {
+        "$oid": "5ee2e11a5687e02528d6d107"
+      },
+      "testeStatus": "",
+      "data": {
+        "$date": "2020-06-18T00:00:00Z"
+      },
+      "resultadoTeste": ""
+    }
+  ],
+  "cod": 4,
+  "name": "Rafael",
+  "age": 23,
+  "sex": "masculino",
+  "sintomas": "",
+  "estado": "suspeito",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee2cbbbdbc5000774e46dc6"
+  },
+  "testes": [
+    {
+      "_id": {
+        "$oid": "5ee2e12d5687e02528d6d108"
+      },
+      "testeStatus": "Realizado",
+      "data": {
+        "$date": "2020-06-12T00:00:00Z"
+      },
+      "resultadoTeste": "Negativo"
+    },
+    {
+      "_id": {
+        "$oid": "5ee3f2b7bb95e9632425908b"
+      },
+      "testeStatus": "",
+      "data": {
+        "$date": "2020-06-20T00:00:00Z"
+      },
+      "resultadoTeste": ""
+    }
+  ],
+  "cod": 5,
+  "name": "Bruno",
+  "age": 50,
+  "sex": "masculino",
+  "sintomas": "",
+  "estado": "suspeito",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee2cbd9dbc5000774e46dc7"
+  },
+  "testes": [
+    {
+      "_id": {
+        "$oid": "5ee3b78763439d6c7496629c"
+      },
+      "testeStatus": "Em espera",
+      "data": {
+        "$date": "2020-06-16T00:00:00Z"
+      },
+      "resultadoTeste": ""
+    }
+  ],
+  "cod": 6,
+  "name": "Crisanto",
+  "age": 22,
+  "sex": "masculino",
+  "sintomas": "",
+  "estado": "suspeito",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee3a3c2fcd7ad6da040af86"
+  },
+  "testes": [
+    {
+      "_id": {
+        "$oid": "5ee3b9ba92717052ec782adc"
+      },
+      "testeStatus": "",
+      "data": {
+        "$date": "2020-06-16T00:00:00Z"
+      },
+      "resultadoTeste": ""
+    }
+  ],
+  "cod": 7,
+  "name": "Zé",
+  "age": 22,
+  "sex": "masculino",
+  "sintomas": "",
+  "estado": "suspeito",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee3a47efcd7ad6da040af87"
+  },
+  "testes": [],
+  "cod": 8,
+  "name": "Filipa Silveira",
+  "age": 22,
+  "sex": "feminino",
+  "sintomas": "",
+  "estado": "suspeito",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee3a5b5fcd7ad6da040af88"
+  },
+  "testes": [
+    {
+      "_id": {
+        "$oid": "5ee3bd5ccf9fdd464825249e"
+      },
+      "testeStatus": "",
+      "data": {
+        "$date": "2020-06-16T00:00:00Z"
+      },
+      "resultadoTeste": ""
+    }
+  ],
+  "cod": 9,
+  "name": "Filipa",
+  "age": 33,
+  "sex": "feminino",
+  "sintomas": "",
+  "estado": "suspeito",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee3a5e5c2b18f63cc5f7b1a"
+  },
+  "testes": [
+    {
+      "_id": {
+        "$oid": "5ee3bb8cb801530eb4daa313"
+      },
+      "testeStatus": "Realizado",
+      "data": {
+        "$date": "2020-06-25T00:00:00Z"
+      },
+      "resultadoTeste": "Negativo"
+    }
+  ],
+  "cod": 10,
+  "name": "Miguel",
+  "age": 22,
+  "sex": "masculino",
+  "sintomas": "",
+  "estado": "suspeito",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee3a637c2b18f63cc5f7b1b"
+  },
+  "testes": [
+    {
+      "_id": {
+        "$oid": "5ee3ba1092717052ec782add"
+      },
+      "testeStatus": "Realizado",
+      "data": {
+        "$date": "2020-06-17T00:00:00Z"
+      },
+      "resultadoTeste": "Negativo"
+    },
+    {
+      "_id": {
+        "$oid": "5ee3c0c7287c7b2cd4e30896"
+      },
+      "testeStatus": "Realizado",
+      "data": {
+        "$date": "2020-06-20T00:00:00Z"
+      },
+      "resultadoTeste": "Negativo"
+    }
+  ],
+  "cod": 11,
+  "name": "Ana Filipa",
+  "age": 22,
+  "sex": "feminino",
+  "sintomas": "",
+  "estado": "Não infetado",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee3b3493f0bf4628c627353"
+  },
+  "testes": [
+    {
+      "_id": {
+        "$oid": "5ee3ba5192717052ec782ade"
+      },
+      "testeStatus": "Em espera",
+      "data": {
+        "$date": "2020-06-15T00:00:00Z"
+      },
+      "resultadoTeste": ""
+    }
+  ],
+  "cod": 15,
+  "name": "Maria",
+  "age": 22,
+  "sex": "feminino",
+  "sintomas": "Febre",
+  "estado": "suspeito",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee3c5355a0a4761d031731e"
+  },
+  "testes": [
+    {
+      "_id": {
+        "$oid": "5ee3edffbb95e96324259088"
+      },
+      "testeStatus": "",
+      "data": {
+        "$date": "2020-06-18T00:00:00Z"
+      },
+      "resultadoTeste": ""
+    }
+  ],
+  "cod": 17,
+  "name": "Rubén",
+  "age": 34,
+  "sex": "masculino",
+  "sintomas": "",
+  "estado": "suspeito",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee3c74a8a677964b84323b7"
+  },
+  "testes": [],
+  "cod": 18,
+  "name": "Vera",
+  "age": 23,
+  "sex": "feminino",
+  "sintomas": "",
+  "estado": "suspeito",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee3c8af4268d76e14ea04ab"
+  },
+  "testes": [],
+  "cod": 19,
+  "name": "Tomás",
+  "age": 45,
+  "sex": "masculino",
+  "sintomas": "",
+  "estado": "suspeito",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee3e8e1bb95e96324259087"
+  },
+  "testes": [],
+  "cod": 20,
+  "name": "Rafael",
+  "age": 23,
+  "sex": "masculino",
+  "sintomas": "Dor de cabeça.",
+  "estado": "suspeito",
+  "__v": 0
+}]

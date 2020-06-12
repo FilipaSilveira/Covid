@@ -1,6 +1,3 @@
-//não por nome nem codigo
-//
-
 const mongoose = require('mongoose');
 
 const testeSchema = mongoose.Schema({
@@ -18,6 +15,5 @@ const testeSchema = mongoose.Schema({
         type: String
     }
 });
-
 
 module.exports = mongoose.model('teste', testeSchema);

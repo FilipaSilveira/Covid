@@ -4,11 +4,11 @@ Código: <%= tecnicos.cod %>
     <input type="hidden" class="form-control" name="cod" min="0" placeholder="Não preencher, o código é gerado automáticamente" value="<%= tecnicos.cod %>">
     <div class="form-group">
         <label>Nome</label>
-        <input type="text" class="form-control" name="name" value="<%= tecnicos.name %>">
+        <input type="text" class="form-control" name="name" value="<%= tecnicos.name %>" required>
     </div>
     <div class="form-group">
         <label>Idade</label>
-        <input type="number" class="form-control" name="age" min="0" value="<%= tecnicos.age %>">
+        <input type="number" class="form-control" name="age" min="0" value="<%= tecnicos.age %>" required>
     </div>
     <div>
         <label for="age">Sexo:</label><br>
@@ -31,12 +31,12 @@ Código: <%= tecnicos.cod %>
     </div>
     <div class="form-group">
         <label>Email</label>
-        <input type="text" class="form-control" name="email" value="<%= tecnicos.email %>">
+        <input type="text" class="form-control" name="email" value="<%= tecnicos.email %>" required>
     </div>
     <div class="form-row">
         <div class="form-group col-md-4">
             <label>Telemóvel</label>
-            <input type="text" class="form-control" name="mobile" value="<%= tecnicos.mobile %>">
+            <input type="text" class="form-control" name="mobile" value="<%= tecnicos.mobile %>" required>
         </div>
         <div class="form-group col-md-6">
             <label>Cidade</label>
@@ -44,7 +44,7 @@ Código: <%= tecnicos.cod %>
         </div>
         <div>
             <label>Password</label>
-            <input type="password" class="form-control" name="password" value="<%= tecnicos.password %>">
+            <input type="password" class="form-control" name="password" value="<%= tecnicos.password %>" required>
         </div>
     </div><br>
     <div class="form-group">

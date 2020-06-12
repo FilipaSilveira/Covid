@@ -9,12 +9,10 @@ router.get('/', (req, res) => {
     res.render('administracao')
 });
 
-
 //para mudar a password do admin
 router.post('/', (req, res) => {
     updateAdminRecord(req, res);
 });
-
 
 //Gerir os Técnicos (adicionar, editar e remover)
 router.get('/gerirTecnicos', (req, res) => {
@@ -185,17 +183,14 @@ router.get('/gerirTecnicos/delete/:cod', (req, res) => {
 router.get('/informacoes', (req, res) => {
     Paciente.find((err, docs) => {     
         if (!err) {
-            console.log(docs);
             var i;
             var pacientes = 0;
             var d = new Date();
             d.setDate(d.getDate());
             d.setHours(0,0,0,0);
-            console.log(d);
             for(i=0; i<docs.length; i++){
                 if(docs[i].testes.length > 0){
                     if(docs[i].testes[docs[i].testes.length-1].data >= d && docs[i].testes[docs[i].testes.length-1].testeStatus == "Realizado"){
-                        //pacientes.push([docs[i], docs[i].testes[docs[i].testes.length-1].data]);
                         if(docs[i].testes.length >= 2){
                             if(docs[i].testes[docs[i].testes.length-1].resultadoTeste == "Negativo" && docs[i].testes[docs[i].testes.length-2].resultadoTeste == "Negativo"){
                                
@@ -220,6 +215,7 @@ router.get('/informacoes', (req, res) => {
     });
 });
 
+//Conta o numero de infetados
 router.post('/informacoes2', (req, res) => {
     Paciente.findOne({ cod: req.body.cod }, (err, doc) => {
         if (!err) { 
@@ -240,23 +236,18 @@ router.post('/informacoes2', (req, res) => {
     });
 })
 
+//pesquisa quantidade de testes feitos num dia
 router.post('/informacoes1', (req, res) => {
     Paciente.find({}, (err, doc) => {
         if (!err) { 
-            console.log("--------------");
             var countTestes = 0;
             var i;
             var d = new Date(req.body.data);
             d.setDate(d.getDate());
             d.setHours(0,0,0,0);
-            console.log(d);
-            console.log(d.getTime());
-            console.log(req.body.data);
             for(i=0; i<doc.length; i++){
                 var j;
                 for(j=0; j<doc[i].testes.length; j++){
-                    //console.log(doc[i].testes[j].data);
-                    //console.log(doc[i].testes[j].data.getTime());
                     var dataIf = "";
                     dataIf += doc[i].testes[j].data.getFullYear();
                     dataIf += "-";
@@ -273,13 +264,11 @@ router.post('/informacoes1', (req, res) => {
                         dataIf += "0";
                         dataIf += doc[i].testes[j].data.getDate();
                     }
-                    console.log(dataIf);
                     if(req.body.data == dataIf){
                         countTestes++;
                     }
                 }
             }
-            console.log(countTestes);
             res.render("infoGerais", {
                 informacoes1: true,
                 countTestes: countTestes,
@@ -296,8 +285,6 @@ router.post('/informacoes1', (req, res) => {
                 console.log('Erro a fazer update: ' + err);
         }
     });
-})
-
-///id 
+}) 
 
 module.exports = router;

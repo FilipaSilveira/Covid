@@ -16,13 +16,6 @@ app.use(bodyParser.json());
 // Bodyparser
 app.use(express.urlencoded({ extended: false}));
 
-//app.set('views', './views');
-
-//Connect DB
-/*mongoose.connect('mongodb+srv://trabalhopaw:paw2020@cluster0-gifs8.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true }, () =>
-    console.log('connected to db')
-);*/
-
 
 mongoose.connect(config.dbUrl);
 mongoose.connection.on('connected', () => {
@@ -48,7 +41,6 @@ app.use(session({
     saveUninitialized: true
 }));
 
-
 // Connect flash
 app.use(flash());
 
@@ -60,7 +52,6 @@ app.use((req, res, next) => {
     next();
 });
 
-
 //import routes
 const homeRoute = require('./routes/home');
 const adminRoute = require('./routes/admin');
@@ -69,8 +60,6 @@ const tecnicosRoute = require('./routes/tecnicos');
 app.use('/', homeRoute);
 app.use('/admin', adminRoute);
 app.use('/tecnicos', tecnicosRoute);
-
-
 
 //Listen 
 const PORT = process.env.PORT || 3000;

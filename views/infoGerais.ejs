@@ -16,7 +16,6 @@
     <button type="submit" class="btn btn-info">Pesquisar</button>
 </form>
 
-
 <% if(informacoes2){ %>
     Nome:
     <%= informacoes2.name  %> <br>
@@ -30,7 +29,6 @@
             <p>Status: <%= informacoes2.testes[i].testeStatus %></p>
             <p>Data: <%= informacoes2.testes[i].data %></p>
             <p>Resultado: <%= informacoes2.testes[i].resultadoTeste %></p>
-          
             <!-- TODO_pdf -->
         <% } %>
 <% } %> 

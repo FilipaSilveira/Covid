@@ -1,5 +1,3 @@
-//array de testes -->teste.js
-
 const mongoose = require('mongoose');
 
 const pacienteSchema = mongoose.Schema({
@@ -35,6 +33,5 @@ const pacienteSchema = mongoose.Schema({
         "default": [] 
     }
 });
-
 
 module.exports = mongoose.model('paciente', pacienteSchema);

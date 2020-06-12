@@ -1,0 +1,43 @@
+[{
+  "_id": {
+    "$oid": "5ebc5a2f82be1b24bc45f5ea"
+  },
+  "isAdmin": true,
+  "cod": 1,
+  "name": "ADMIN",
+  "age": 22,
+  "sex": "feminino",
+  "email": "admin@gmail.com",
+  "mobile": "915569133",
+  "city": "porto",
+  "password": "admin",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee2ca7fdbc5000774e46dc0"
+  },
+  "isAdmin": false,
+  "cod": 2,
+  "name": "Filipa",
+  "age": 22,
+  "sex": "feminino",
+  "email": "filipasilveira2010@hotmail.com",
+  "mobile": "915569133",
+  "city": "porto",
+  "password": "1234",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ee2caa2dbc5000774e46dc1"
+  },
+  "isAdmin": false,
+  "cod": 3,
+  "name": "Miguel",
+  "age": 20,
+  "sex": "masculino",
+  "email": "miguel@hotmail.com",
+  "mobile": "915569133",
+  "city": "porto",
+  "password": "1234",
+  "__v": 0
+}]

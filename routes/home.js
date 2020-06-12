@@ -6,19 +6,6 @@ router.get('/', (req, res) => {
     res.render('dashboard')
 });
 
-/*router.post('/', async (req, res) =>{
-    const post = new Home({
-        user: req.body.user,
-        pass: req.body.pass
-    });
-    try {
-        const savedPost = await post.save();
-        res.json(savedPost);
-    } catch (err) {
-        res.json({ message: err });
-    }
-});*/
-
 //PACIENTES
 //fazer_pedido
 router.get('/fazer_pedido', (req, res) => res.render('fazerPedido'));
@@ -49,11 +36,9 @@ async function insertPaciente(req, res) {
     const paciente = new Paciente();
     var lastid = await createId();
     paciente.cod = lastid;
-    //paciente.cod = req.body.cod;
     paciente.name = req.body.name;
     paciente.age = req.body.age;
     paciente.sex = req.body.sex;
-    console.log(req.body.info);
     if ( typeof req.body.info !== 'undefined' && req.body.info )
     {
         paciente.prioritario = true;
@@ -66,9 +51,6 @@ async function insertPaciente(req, res) {
     console.log(err);
     if (!err){
         res.redirect('/ver_pedido/' + lastid);
-
-
-
     }else {
         if (err.name == 'ValidationError') {
              handleValidationError(err, req.body);
@@ -84,33 +66,6 @@ async function insertPaciente(req, res) {
 
 router.post('/receber_pedido', function(req,res,next){
     insertPaciente(req, res);
-    
-    /*
-    const paciente = new Paciente();
-    var lastid = await createId();
-    paciente.cod = lastid;
-    //paciente.cod = req.body.cod;
-    paciente.name = req.body.name;
-    paciente.age = req.body.age;
-    paciente.sex = req.body.sex;
-    paciente.sintomas = req.body.sintomas;
-    paciente.estado = "suspeito";
-    paciente.save((err, doc) => {
-    console.log(err);
-    if (!err){
-        res.redirect('/');
-    }else {
-        if (err.name == 'ValidationError') {
-             handleValidationError(err, req.body);
-            res.render("/fazer_pedido", {
-                paciente: req.body
-            });
-        }else{
-            console.log('Erro a fazer insert: ' + err);
-        }
-    }
-    });
-    */
 });
 
 //ver_pedido
@@ -119,7 +74,6 @@ router.post('/ver_pedidos', (req, res) => {
     //enviar informação
     Paciente.findOne({cod: req.body.cod}, (err, doc) => {
         if (!err) {
-            console.log(doc);
             res.render("verPedido", {paciente: doc});
         }
     });
@@ -130,7 +84,6 @@ router.get('/ver_pedido/:cod', (req, res) => {
     //enviar informação
     Paciente.findOne({cod: req.params.cod}, (err, doc) => {
         if (!err) {
-            console.log(doc);
             res.render("verPedido", {paciente: doc});
         }
     });
