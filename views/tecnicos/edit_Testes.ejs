@@ -1,11 +1,15 @@
 <form action="/tecnicos/editar_testes/<%= paciente_cod %>/<%= pos_teste %>" method="POST">
-    <h1>Atualizar teste</h1>
-    <input type="text" id="testeStatus" name="testeStatus" value="<%= teste.testeStatus %>"><br>
-    <input type="text" id="resultadoTeste" name="resultadoTeste" value="<%= teste.resultadoTeste %>"><br><br>
-    <input type="hidden" id="data" name="data" value="<%= teste.data %>"><br><br>
+    <h2>Atualizar teste</h2>
+    <p> Data: <%= teste.data %> </p> 
+    <label for="testeStatus">Estado do Teste:</label><br>
+    <input type="text" id="testeStatus" name="testeStatus" placeholder="Em espera/Realizado" value="<%= teste.testeStatus %>"><br>
+    <label for="resultadoTeste">Resultado do Teste:</label><br>
+    <input type="text" id="resultadoTeste" name="resultadoTeste" placeholder="Positivo/Negativo" value="<%= teste.resultadoTeste %>"><br><br>
+    <input type="file" name="arquivos"><br><br>
+    <input type="hidden" id="data" name="data" value="<%= teste.data %>">
     <button type="submit" class="btn btn-info">Atualizar</button>
 </form> 
-<p> Data: <%= teste.data %> </p> 
+
 
 
 
