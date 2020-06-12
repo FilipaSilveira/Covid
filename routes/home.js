@@ -3,7 +3,7 @@ const router = express.Router();
 const Paciente = require('../models/paciente');
 
 router.get('/', (req, res) => {
-    res.render('login')
+    res.render('dashboard')
 });
 
 /*router.post('/', async (req, res) =>{
@@ -56,9 +56,7 @@ router.post('/ver_pedidos', (req, res) => {
     Paciente.findOne({cod: req.body.cod}, (err, doc) => {
         if (!err) {
             console.log(doc);
-            res.render("verPedido", {
-                paciente: doc
-            });
+            res.render("verPedido", {paciente: doc});
         }
     });
 });

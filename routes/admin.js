@@ -250,19 +250,39 @@ router.post('/informacoes1', (req, res) => {
             d.setDate(d.getDate());
             d.setHours(0,0,0,0);
             console.log(d);
+            console.log(d.getTime());
             console.log(req.body.data);
             for(i=0; i<doc.length; i++){
                 var j;
                 for(j=0; j<doc[i].testes.length; j++){
-                    console.log(doc[i].testes[j].data);
-                    if(req.body.data == doc[i].testes[j].data.getDate()){
+                    //console.log(doc[i].testes[j].data);
+                    //console.log(doc[i].testes[j].data.getTime());
+                    var dataIf = "";
+                    dataIf += doc[i].testes[j].data.getFullYear();
+                    dataIf += "-";
+                    if((doc[i].testes[j].data.getMonth()+1) > 9 ){
+                        dataIf += (doc[i].testes[j].data.getMonth()+1);
+                    }else{
+                        dataIf += "0";
+                        dataIf += (doc[i].testes[j].data.getMonth()+1);
+                    }
+                    dataIf += "-";
+                    if(doc[i].testes[j].data.getDate() > 9 ){
+                        dataIf += doc[i].testes[j].data.getDate();
+                    }else{
+                        dataIf += "0";
+                        dataIf += doc[i].testes[j].data.getDate();
+                    }
+                    console.log(dataIf);
+                    if(req.body.data == dataIf){
                         countTestes++;
                     }
                 }
             }
             console.log(countTestes);
             res.render("infoGerais", {
-                informacoes1: countTestes,
+                informacoes1: true,
+                countTestes: countTestes,
                 informacoes2: false,
                 countInfetados: req.body.countInfetados
             }); 

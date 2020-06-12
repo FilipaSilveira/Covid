@@ -1,4 +1,5 @@
-Nome:
+<% if(paciente) { %>
+  Nome:
 <%= paciente.name  %> <br>
 Código:
 <%= paciente.cod  %><br><br>
@@ -16,4 +17,9 @@ Estado:
         <p>Data: <%= paciente.testes[i].data %></p>
         <p>Resultado: <%= paciente.testes[i].resultadoTeste %></p><br>
         <!-- TODO_pdf -->
-    <% } %> 
+    <% } %>
+<% } else {%> 
+  <p>NÃO FOI ENCONTRADO</p>
+<% } %> 
+
+ 
